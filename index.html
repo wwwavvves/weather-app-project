@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./src/style.css" />
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -16,22 +16,29 @@
   </head>
   <body>
     <div class="weather-app">
-      <main>
+      <header>
         <form class="search-container">
-          <input type="text" placeholder="Enter a city" id="search-input" />
+          <input
+            type="text"
+            placeholder="Enter a city"
+            id="search-input"
+            required
+          />
           <input type="submit" value="Search" id="search-btn" />
         </form>
-        <div class="weather-container">
-          <div class="weather-details">
-            <h1>Paris</h1>
+      </header>
+      <main>
+        <div class="weather-details">
+          <h1>Paris</h1>
+          <p>
             Saturday 19:04, broken clouds <br />
-            Humidity: 72%, Wind: 5.66km/h
-          </div>
-          <div class="city-temperature">
-            <span class="weather-icon">☁</span>16<span class="temp-unit"
-              >ºC</span
-            >
-          </div>
+            Humidity: <strong>72%</strong>, Wind: <strong>5.66km/h</strong>
+          </p>
+        </div>
+        <div class="city-temperature">
+          <div class="city-temperature-icon">☁</div>
+          <div class="city-temperature-degrees">16</div>
+          <span class="city-temperature-unit">ºC</span>
         </div>
       </main>
       <footer>
@@ -51,6 +58,6 @@
       </footer>
     </div>
 
-    <script src="./script..js"></script>
+    <script src="./src/script..js"></script>
   </body>
 </html>
