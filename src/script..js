@@ -1,4 +1,4 @@
-// search and api
+// API + WEATHER SEARCH AND UPDATE
 function updateCityWeather(response) {
   let message = response.data.message;
   if (message === "City not found") {
@@ -52,10 +52,10 @@ function handleSearchSubmit(event) {
 let searchFormElement = document.querySelector("#search-container");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
+// DEFAULT CITY
 searchCityWeather("Lisbon");
 
-// day/time TEST DATETIME WITH API DATA AND PUT INSIDE FUNCTION
-
+// DAY/TIME - TEST DATETIME WITH API DATA AND PUT INSIDE FUNCTION
 let currentDate = new Date();
 let dayContainer = document.querySelector("#day");
 let hourContainer = document.querySelector("#hours");
