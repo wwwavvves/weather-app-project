@@ -1,9 +1,19 @@
+// search function
 let searchInput = document.querySelector("#search-input");
 let searchBtn = document.querySelector("#search-btn");
 let city = document.querySelector("#city");
-let day = document.querySelector("#day");
-let time = document.querySelector("#time");
 
+searchBtn.addEventListener("click", changeCity);
+function changeCity(event) {
+  event.preventDefault();
+  let searchInputValue = searchInput.value;
+  city.innerHTML = `${searchInputValue}`;
+}
+
+// day/time function
+let dayContainer = document.querySelector("#day");
+let hourContainer = document.querySelector("#hours");
+let minuteContainer = document.querySelector("#minutes");
 let currentDate = new Date();
 
 let weekdays = [
@@ -16,10 +26,17 @@ let weekdays = [
   "Saturday",
 ];
 let weekday = weekdays[currentDate.getDay()];
-day.innerHTML = `${weekday}`;
+dayContainer.innerHTML = `${weekday}`;
 
 let hours = currentDate.getHours();
 let minutes = currentDate.getMinutes();
-time.innerHTML = `${hours}:${minutes}`;
-// create function for day/time
-// add a zero if hours or minutes only have one character
+if (hours < 10) {
+  hourContainer.innerHTML = `0${hours}`;
+} else {
+  hourContainer.innerHTML = `${hours}`;
+}
+if (minutes < 10) {
+  minuteContainer.innerHTML = `0${minutes}`;
+} else {
+  minuteContainer.innerHTML = `${minutes}`;
+}
