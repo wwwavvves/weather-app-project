@@ -7,7 +7,24 @@ searchBtn.addEventListener("click", changeCity);
 function changeCity(event) {
   event.preventDefault();
   let searchInputValue = searchInput.value;
-  city.innerHTML = `${searchInputValue}`;
+  if (searchInputValue.length !== 0) {
+    city.innerHTML = `${searchInputValue}`;
+  } else {
+    alert("Input field is empty, please enter a city");
+  }
+}
+
+// api connection
+let queryCity = "Paris";
+let apiKey = "68a066fb34dtb3fc9d4875c8d3bo09b6";
+let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${queryCity}&key=${apiKey}&units=metric`;
+
+axios.get(apiUrl).then(getCityWeather);
+
+function getCityWeather(response) {
+  let degrees = Math.round(response.data.temperature.current);
+  let cityTemperature = document.querySelector("#city-temperature-degrees");
+  cityTemperature.innerHTML = `${degrees}`;
 }
 
 // day/time function
