@@ -1,33 +1,46 @@
-// search function
-let searchInput = document.querySelector("#search-input");
-let searchBtn = document.querySelector("#search-btn");
-let city = document.querySelector("#city");
-
-searchBtn.addEventListener("click", changeCity);
-function changeCity(event) {
-  event.preventDefault();
-  let searchInputValue = searchInput.value;
-  if (searchInputValue.length !== 0) {
-    city.innerHTML = `${searchInputValue}`;
+// search and api
+function updateCityWeather(response) {
+  let message = response.data.message;
+  if (message === "City not found") {
+    alert("City not found");
   } else {
-    alert("Input field is empty, please enter a city");
+    let cityElement = document.querySelector("#city");
+    let city = response.data.city;
+    cityElement.innerHTML = city;
+
+    let degrees = Math.round(response.data.temperature.current);
+    let cityTemperatureElement = document.querySelector(
+      "#city-temperature-degrees"
+    );
+    cityTemperatureElement.innerHTML = `${degrees}`;
   }
 }
 
-// api connection
-let queryCity = "Paris";
-let apiKey = "68a066fb34dtb3fc9d4875c8d3bo09b6";
-let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${queryCity}&key=${apiKey}&units=metric`;
+function searchCityWeather(city) {
+  let apiKey = "68a066fb34dtb3fc9d4875c8d3bo09b6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
-axios.get(apiUrl).then(getCityWeather);
-
-function getCityWeather(response) {
-  let degrees = Math.round(response.data.temperature.current);
-  let cityTemperature = document.querySelector("#city-temperature-degrees");
-  cityTemperature.innerHTML = `${degrees}`;
+  axios.get(apiUrl).then(updateCityWeather);
 }
 
-// day/time function
+function handleSearchSubmit(event) {
+  event.preventDefault();
+  let searchInput = document.querySelector("#search-input");
+  let searchInputValue = searchInput.value;
+
+  if (searchInputValue.length === 0) {
+    alert("Input field is empty, please enter a city");
+  } else {
+    searchCityWeather(searchInputValue);
+  }
+}
+
+let searchFormElement = document.querySelector("#search-container");
+searchFormElement.addEventListener("submit", handleSearchSubmit);
+
+searchCityWeather("Lisbon");
+
+// day/time
 let dayContainer = document.querySelector("#day");
 let hourContainer = document.querySelector("#hours");
 let minuteContainer = document.querySelector("#minutes");

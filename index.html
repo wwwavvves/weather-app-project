@@ -20,7 +20,7 @@
   <body>
     <div class="weather-app">
       <header>
-        <form class="search-container">
+        <form class="search-container" id="search-container">
           <input
             type="text"
             placeholder="Enter a city"
@@ -32,7 +32,7 @@
       </header>
       <main>
         <div class="weather-details">
-          <h1 id="city">Paris</h1>
+          <h1 id="city"></h1>
           <p>
             <span id="day"></span> <span id="hours"></span>:<span
               id="minutes"
@@ -44,9 +44,10 @@
         </div>
         <div class="city-temperature">
           <div class="city-temperature-icon">☁</div>
-          <div class="city-temperature-degrees" id="city-temperature-degrees">
-            16
-          </div>
+          <div
+            class="city-temperature-degrees"
+            id="city-temperature-degrees"
+          ></div>
           <span class="city-temperature-unit">ºC</span>
         </div>
       </main>
