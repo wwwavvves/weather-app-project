@@ -100,8 +100,10 @@ main {
   color: rgb(90, 90, 90);
 }
 
-.weather-details strong {
+#humidity,
+#wind {
   color: rgb(170, 125, 132);
+  font-weight: bold;
 }
 
 .city-temperature {
@@ -109,9 +111,8 @@ main {
   align-items: center;
 }
 
-.city-temperature-icon {
-  font-size: 48px;
-  margin-right: 10px;
+.city-temperature-icon img {
+  width: 90px;
 }
 
 .city-temperature-degrees {

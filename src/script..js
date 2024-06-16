@@ -8,6 +8,20 @@ function updateCityWeather(response) {
     let city = response.data.city;
     cityElement.innerHTML = city;
 
+    let conditionElement = document.querySelector("#weather-condition");
+    let humidityElement = document.querySelector("#humidity");
+    let windElement = document.querySelector("#wind");
+    let weatherConditions = response.data.condition.description;
+    let humidity = response.data.temperature.humidity;
+    let wind = response.data.wind.speed;
+    conditionElement.innerHTML = weatherConditions;
+    humidityElement.innerHTML = `${humidity}%`;
+    windElement.innerHTML = `${wind}km/h`;
+
+    let iconElement = document.querySelector("#city-temperature-icon");
+    let iconUrl = response.data.condition.icon_url;
+    iconElement.innerHTML = `<img src="${iconUrl}">`;
+
     let degrees = Math.round(response.data.temperature.current);
     let cityTemperatureElement = document.querySelector(
       "#city-temperature-degrees"
@@ -40,12 +54,12 @@ searchFormElement.addEventListener("submit", handleSearchSubmit);
 
 searchCityWeather("Lisbon");
 
-// day/time
+// day/time TEST DATETIME WITH API DATA AND PUT INSIDE FUNCTION
+
+let currentDate = new Date();
 let dayContainer = document.querySelector("#day");
 let hourContainer = document.querySelector("#hours");
 let minuteContainer = document.querySelector("#minutes");
-let currentDate = new Date();
-
 let weekdays = [
   "Sunday",
   "Monday",
