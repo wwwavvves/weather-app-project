@@ -55,32 +55,37 @@ searchFormElement.addEventListener("submit", handleSearchSubmit);
 // DEFAULT CITY
 searchCityWeather("Lisbon");
 
-// DAY/TIME - TEST DATETIME WITH API DATA AND PUT INSIDE FUNCTION
-let currentDate = new Date();
-let dayContainer = document.querySelector("#day");
-let hourContainer = document.querySelector("#hours");
-let minuteContainer = document.querySelector("#minutes");
-let weekdays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-let weekday = weekdays[currentDate.getDay()];
-dayContainer.innerHTML = `${weekday}`;
+// DATE TIME
+let currentDateTime = new Date();
 
-let hours = currentDate.getHours();
-let minutes = currentDate.getMinutes();
-if (hours < 10) {
-  hourContainer.innerHTML = `0${hours}`;
-} else {
-  hourContainer.innerHTML = `${hours}`;
+function dateTime(date) {
+  let dayContainer = document.querySelector("#day");
+  let hourContainer = document.querySelector("#hours");
+  let minuteContainer = document.querySelector("#minutes");
+  let weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+  let weekday = weekdays[currentDateTime.getDay()];
+  dayContainer.innerHTML = `${weekday}`;
+
+  let hours = currentDateTime.getHours();
+  let minutes = currentDateTime.getMinutes();
+  if (hours < 10) {
+    hourContainer.innerHTML = `0${hours}`;
+  } else {
+    hourContainer.innerHTML = `${hours}`;
+  }
+  if (minutes < 10) {
+    minuteContainer.innerHTML = `0${minutes}`;
+  } else {
+    minuteContainer.innerHTML = `${minutes}`;
+  }
 }
-if (minutes < 10) {
-  minuteContainer.innerHTML = `0${minutes}`;
-} else {
-  minuteContainer.innerHTML = `${minutes}`;
-}
+
+dateTime(currentDateTime);
