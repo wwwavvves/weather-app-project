@@ -117,9 +117,6 @@ main {
   row-gap: 10px;
 }
 
-.forecast-icon {
-}
-
 .forecast-minmax {
   display: flex;
   column-gap: 5px;

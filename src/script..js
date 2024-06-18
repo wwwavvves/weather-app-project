@@ -27,6 +27,8 @@ function updateCityWeather(response) {
       "#city-temperature-degrees"
     );
     cityTemperatureElement.innerHTML = `${degrees}`;
+
+    getForecast(city);
   }
 }
 
@@ -89,3 +91,49 @@ function dateTime(date) {
 }
 
 dateTime(currentDateTime);
+
+// FORECAST
+function displayForecast(response) {
+  console.log(response);
+
+  let forecastSection = document.querySelector("#forecast-section");
+
+  let weekdays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+  let forecastDay = "";
+
+  weekdays.forEach(function (day) {
+    forecastDay += `
+      <div class="forecast-day">
+        <div class="forecast-weekday">${day}</div>
+        <div class="forecast-icon">☁</div>
+        <div class="forecast-minmax">
+          <div class="forecast-max">24º</div>
+          <div class="forecast-min">16º</div>
+        </div>
+      </div>
+    `;
+  });
+
+  // or with a for loop
+  // for (i = 0; i < weekdays.length; i++) {
+  //   forecastDay += `
+  //     <div class="forecast-day">
+  //       <div class="forecast-weekday">${weekdays[i]}</div>
+  //       <div class="forecast-icon">☁</div>
+  //       <div class="forecast-minmax">
+  //         <div class="forecast-max">24º</div>
+  //         <div class="forecast-min">16º</div>
+  //       </div>
+  //     </div>
+  //   `;
+  // }
+
+  forecastSection.innerHTML = forecastDay;
+}
+
+function getForecast(city) {
+  let apiKey = "68a066fb34dtb3fc9d4875c8d3bo09b6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
