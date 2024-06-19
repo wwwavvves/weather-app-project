@@ -1,3 +1,61 @@
+// FORECAST
+function formatDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[date.getDay()];
+}
+
+function displayForecast(response) {
+  console.log(response.data);
+  let forecastSection = document.querySelector("#forecast-section");
+
+  let weekdays = response.data.daily;
+  let forecastDay = "";
+
+  weekdays.forEach(function (day, index) {
+    if (index > 0 && index < 6) {
+      forecastDay += `
+      <div class="forecast-day">
+        <div class="forecast-weekday">${formatDate(day.time)}</div>
+        <div class="forecast-icon"><img src="${day.condition.icon_url}" /></div>
+        <div class="forecast-minmax">
+          <div class="forecast-max">${Math.round(
+            day.temperature.maximum
+          )}º</div>
+          <div class="forecast-min">${Math.round(
+            day.temperature.minimum
+          )}º</div>
+        </div>
+      </div>
+    `;
+    }
+  });
+
+  // or with a for loop
+  // for (i = 0; i < weekdays.length; i++) {
+  //   forecastDay += `
+  //     <div class="forecast-day">
+  //       <div class="forecast-weekday">${weekdays[i]}</div>
+  //       <div class="forecast-icon">☁</div>
+  //       <div class="forecast-minmax">
+  //         <div class="forecast-max">24º</div>
+  //         <div class="forecast-min">16º</div>
+  //       </div>
+  //     </div>
+  //   `;
+  // }
+
+  forecastSection.innerHTML = forecastDay;
+}
+
+function getForecast(city) {
+  let apiKey = "68a066fb34dtb3fc9d4875c8d3bo09b6";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 // API + WEATHER SEARCH AND UPDATE
 function updateCityWeather(response) {
   let message = response.data.message;
@@ -91,49 +149,3 @@ function dateTime(date) {
 }
 
 dateTime(currentDateTime);
-
-// FORECAST
-function displayForecast(response) {
-  console.log(response);
-
-  let forecastSection = document.querySelector("#forecast-section");
-
-  let weekdays = ["Tue", "Wed", "Thu", "Fri", "Sat"];
-  let forecastDay = "";
-
-  weekdays.forEach(function (day) {
-    forecastDay += `
-      <div class="forecast-day">
-        <div class="forecast-weekday">${day}</div>
-        <div class="forecast-icon">☁</div>
-        <div class="forecast-minmax">
-          <div class="forecast-max">24º</div>
-          <div class="forecast-min">16º</div>
-        </div>
-      </div>
-    `;
-  });
-
-  // or with a for loop
-  // for (i = 0; i < weekdays.length; i++) {
-  //   forecastDay += `
-  //     <div class="forecast-day">
-  //       <div class="forecast-weekday">${weekdays[i]}</div>
-  //       <div class="forecast-icon">☁</div>
-  //       <div class="forecast-minmax">
-  //         <div class="forecast-max">24º</div>
-  //         <div class="forecast-min">16º</div>
-  //       </div>
-  //     </div>
-  //   `;
-  // }
-
-  forecastSection.innerHTML = forecastDay;
-}
-
-function getForecast(city) {
-  let apiKey = "68a066fb34dtb3fc9d4875c8d3bo09b6";
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(displayForecast);
-}

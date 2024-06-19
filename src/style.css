@@ -106,7 +106,7 @@ main {
   border-bottom: 1px solid rgb(255, 255, 255, 0.6);
   padding-bottom: 40px;
   display: flex;
-  column-gap: 20px;
+  column-gap: 10px;
   justify-content: space-evenly;
   text-align: center;
 }
@@ -114,11 +114,15 @@ main {
 .forecast-day {
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+}
+
+.forecast-icon img {
+  width: 80px;
 }
 
 .forecast-minmax {
   display: flex;
+  justify-content: center;
   column-gap: 5px;
   font-size: 13px;
 }
